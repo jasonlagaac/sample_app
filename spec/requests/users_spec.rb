@@ -60,5 +60,25 @@ describe "Users" do
       end
     end
   end
+
+  describe "User deletion" do
+    it "should not display delete links for a regular user" do
+      @user = Factory(:user)
+      integration_sign_in(@user)
+      controller.should be_signed_in
+
+      visit users_path
+      response.should_not have_selector("a", :content => "delete")
+    end
+
+    it "should display delete links for an admin user" do
+      @admin = Factory(:user, :email => "admin@example.com", :admin => true)
+      integration_sign_in(@admin)
+      controller.should be_signed_in
+
+      visit users_path
+      response.should have_selector("a", :content => "delete")
+    end
+  end
 end
 
