@@ -14,7 +14,6 @@ describe MicropostsController do
       response.should redirect_to(signin_path) 
     end
   end
-  
 
   describe "POST 'create'" do
     before(:each) do

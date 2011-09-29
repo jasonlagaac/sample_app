@@ -80,5 +80,18 @@ describe "Users" do
       response.should have_selector("a", :content => "delete")
     end
   end
+  
+  describe "Micropost deletion" do
+    it "should not display delete links for another user" do
+      @user = Factory(:user)
+      @other_user = Factory(:user, :email => "bar@example.com")
+
+      integration_sign_in(@user)
+      controller.should be_signed_in
+
+      visit users_path(@other_user)
+      response.should_not have_selector("a", :content => "delete")
+    end
+  end
 end
 

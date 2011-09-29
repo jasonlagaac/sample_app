@@ -33,6 +33,16 @@ describe "Microposts" do
           response.should have_selector("span.content", :content => content)
         end.should change(Micropost, :count).by(1)
       end
+    
+      it "should change the micropost count" do
+        content = "lorem ipsum dolor sit amet purple monkey"
+        lambda do
+          visit root_path
+          fill_in :micropost_content, :with => content
+          click_button
+          response.should have_selector("span.content", :content => content)
+        end.should change(Micropost, :count).by(1)
+      end
     end
   end
 end

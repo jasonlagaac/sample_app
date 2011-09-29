@@ -7,3 +7,16 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+
+$(document).ready(function()  {
+  $("#micropost_content").keyup(function() {
+    var box=$(this).val();
+    var count = 140 - box.length;
+
+    if(box.length <= 140) {
+      $('#count').html(count);
+    }
+      
+    return false;
+  });
+});
